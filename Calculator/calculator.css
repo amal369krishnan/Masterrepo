@@ -1,0 +1,63 @@
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+        }
+        
+        body {
+            background-image: url(allec-gomes-rZW1nQTpcFA-unsplash.jpg);
+            background-size: cover;
+        }
+        
+        .container {
+            max-width: 500px;
+            min-width: 360px;
+            margin-top: 50px;
+            margin-left: 39%;
+            margin-right: 33.1%;
+            border-radius: 8px;
+            border: 2px solid lightseagreen;
+            background-image: -webkit-linear-gradient(#e9de7e, green);
+        }
+        
+        .screen {
+            border: 1px solid gray;
+            margin-bottom: 10px;
+            max-width: 91%;
+            min-width: 91%;
+            height: 30px;
+            background-color: rgb(41, 223, 138);
+            padding: 15px;
+            text-align: right;
+            color: rgb(194, 7, 153);
+            font-size: 50px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+        
+        div table {
+            background-image: -webkit-linear-gradient(#e9de7e, green);
+            font-size: 50px;
+            width: 30vh;
+            text-align: center;
+            padding: 5px;
+            margin-left: 30px;
+        }
+        
+        input[type="button"] {
+            font: 2.4em Futura, ‘Century Gothic’, AppleGothic, sans-serif;
+            font-size: 70%;
+            padding: 14px;
+            border: 1px solid #ffcc00;
+            margin: 5px;
+            width: 100%;
+            color: lightsalmon;
+            background-image: linear-gradient(red, green);
+        }
+        
+        input[type="button"]:hover {
+            background-image: linear-gradient(to bottom, yellow, orange);
+        }
+        
+        .screen::placeholder {
+            color: rgb(194, 7, 153);
+        }

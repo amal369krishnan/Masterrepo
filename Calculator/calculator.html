@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<title>Calculator</title>
+<link rel="stylesheet" href="calculator.css"></link>
+<script>
+    function calculator(val) {
+        document.getElementById('disp').value += val;
+
+    }
+
+    function result() {
+        var res = document.getElementById('disp').value;
+        document.getElementById('disp').value = parseFloat(eval(res)).toFixed(5);
+    }
+</script>
+
+<body>
+    <div class="container">
+        <table>
+            <tr><input class="screen" type="text" id="disp" name="display" placeholder="0" readonly=1></tr>
+            <tr>
+                <td><input type="button" id="clear" onclick="document.getElementById('disp').value = ''" value="C"></td>
+                <td><input type="button" onclick="calculator(value)" value="%"></td>
+                <td><input type="button" onclick="document.getElementById('disp').value = value" value="~"></td>
+                <td><input type="button" onclick="calculator(value)" value="/"></td>
+            </tr>
+            <tr>
+                <td><input type="button" onclick="calculator(value)" value="7"></td>
+                <td><input type="button" onclick="calculator(value)" value="8"></td>
+                <td><input type="button" onclick="calculator(value)" value="9"></td>
+                <td><input type="button" onclick="calculator(value)" value="+"></td>
+            </tr>
+            <tr>
+                <td><input type="button" onclick="calculator(value)" value="4"></td>
+                <td><input type="button" onclick="calculator(value)" value="5"></td>
+                <td><input type="button" onclick="calculator(value)" value="6"></td>
+                <td><input type="button" onclick="calculator(value)" value="-"></td>
+            </tr>
+            <tr>
+                <td><input type="button" onclick="calculator(value)" value="1"></td>
+                <td><input type="button" onclick="calculator(value)" value="2"></td>
+                <td><input type="button" onclick="calculator(value)" value="3"></td>
+                <td><input type="button" onclick="calculator(value)" value="*"></td>
+            </tr>
+            <tr>
+                <td><input type="button" onclick="calculator(value)" value="0"></td>
+                <td><input type="button" onclick="calculator(value)" value="00"></td>
+                <td><input type="button" onclick="calculator(value)" value="."></td>
+                <td><input type="button" onclick="result()" value="="></td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>
