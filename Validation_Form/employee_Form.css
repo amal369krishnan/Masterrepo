@@ -1,0 +1,63 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    padding-top: 5px;
+    font-family: 'Marck Script', cursive;
+    font-size: 20px;
+}
+
+input[type="text"] {
+    position: absolute;
+    left: 50%;
+}
+
+input[type="email"] {
+    position: absolute;
+    left: 50%;
+}
+
+input[type="date"] {
+    position: absolute;
+    left: 50%;
+}
+
+.container {
+    /*display: block;*/
+    background-color: aliceblue;
+    max-width: 50%;
+    box-shadow: 3px 8px gray;
+}
+
+input[type=submit] {
+    margin: 10px 8vw;
+    padding: 10px;
+}
+
+input[type=reset] {
+    padding: 10px;
+}
+
+h1 {
+    text-align: center;
+    margin: 10px;
+    text-decoration: underline;
+}
+
+
+/*------------------------------------------------Result----------------------------------------------------------*/
+
+.table {
+    margin-top: 30px;
+    border: 2px solid gray;
+    max-width: 100%;
+}
+
+.table tr,
+.table th {
+    border: 1px solid goldenrod;
+}
+
+.table td {
+    border: 1px solid grey;
+}
