@@ -1,0 +1,37 @@
+*{
+    margin: 0;
+    padding: 0;
+    
+}
+
+form .form_h1{
+   
+text-align:center;
+margin-top: 2em;
+}
+
+.input_text{
+    padding: 20px;
+    position: relative;
+    left: 25%;
+}
+
+.input_text input[type="text"], input[type="email"], input[type="password"]{
+    padding: 10px;
+    margin: 10px;
+}
+
+
+.input_text input[type="radio"]{
+    padding: 10px;
+    margin: 10px;
+}
+
+
+.input_text input[type="submit"], input[type="reset"]{
+    padding: 10px;
+    margin: 10px;
+    position: relative;
+    left: 10%;
+
+}
