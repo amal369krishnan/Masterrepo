@@ -27,13 +27,13 @@ class Employee extends Component{
                 </thead>
                 <tbody>
                 
-                {this.state.items.map((item,index) =>(
+                {(this.state.items=[])?((this.state.items.map((item,index) =>(
                             <tr>
                                 <td key={index}>{item.fname + item.lname}</td>
                                 <td key={index}><Link to={"/view/"+index}>View Details</Link></td>
-                            </tr>
-                            
-                ))}
+                            </tr>      
+                )))
+                ):(<tr></tr>)}
                 </tbody>
             </table>
             </div>

@@ -26,7 +26,9 @@ export default class ViewPage extends Component{
                     </tr>
                 </thead>
                 <tbody>
-                {this.state.items.map((item,index) =>(
+                {
+                    (this.props.match.params.id == index)?
+                (this.state.items.map((item,index) =>(
                             <tr>
                                 <td key={index}>{item.fname}</td>
                                 <td key={index}>{item.lname}</td>
@@ -35,7 +37,8 @@ export default class ViewPage extends Component{
                                 <td key={index}>{item.email}</td>
                             </tr>
                             
-                ))}
+                ))):(<tr></tr>)
+            }
                 </tbody>
             </table>
             </div>

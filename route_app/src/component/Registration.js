@@ -21,41 +21,21 @@ class Register extends Component{
     
     addItems(e){
         
-        let _fname = document.getElementById('fname');
-        let _lname = document.getElementById('lname');
-        let _age = document.getElementById('age');
-        let _hobby = document.getElementById('hobby');
-        let _email = document.getElementById('email');
-        let _password = document.getElementById('password');
-        
         var newItems ={
-            fname:_fname.value,
-            lname: _lname.value,
-            age: _age.value,
-            hobby: _hobby.value,
-            email: _email.value,
-            password: _password.value
+            fname:this.state.value.fname,
+            lname: this.state.value.lname,
+            age: this.state.value.age,
+            hobby: this.state.value.hobby,
+            email: this.state.value.email,
+            password: this.state.value.password
             
     
         };
         var data =  localStorage.getItem("items");
         data = JSON.parse(data);
         data.push(newItems);
-        
-        this.setState((prevState) => {
-            return { 
-              items: prevState.items.concat(newItems) 
-            };
-          });
-         
-            _fname.value = "";
-            _lname.value = "";
-            _age.value = "";
-            _email.value = "";
-            _password.value = "";
-            _hobby.value = "";
            
-            localStorage.setItem('items',JSON.stringify(data));
+        localStorage.setItem('items',JSON.stringify(data));
     
         e.preventDefault();
           /*console.log(this.arr);*/
@@ -91,21 +71,21 @@ class Register extends Component{
 
             <div className="input_text">
                 <label>
-                    <input type="text" placeholder="Age" id="age" required></input>
+                    <input type="text" placeholder="Age" id="age" required onChange={(e)=>this.changedata(e)}></input>
                 </label>
         
                 <label>
-                    <input type="text" placeholder="Hobbies" id="hobby" required></input>
+                    <input type="text" placeholder="Hobbies" id="hobby" required onChange={(e)=>this.changedata(e)}></input>
                 </label>
             </div>
 
             <div className="input_text">
                 <label>
-                    <input type="email" placeholder="email" id="email" required></input>
+                    <input type="email" placeholder="email" id="email" required onChange={(e)=>this.changedata(e)}></input>
                 </label>
 
                 <label>
-                    <input type="password" placeholder="password" id="password" required></input>
+                    <input type="password" placeholder="password" id="password" required onChange={(e)=>this.changedata(e)}></input>
                 </label>
             </div>
 
