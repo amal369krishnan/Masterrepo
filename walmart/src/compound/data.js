@@ -13,47 +13,47 @@ const products = [
 {id : "tmto",
 name:"Tomato",
 image: img1,
-price: '$20'},
+price: 20},
 
 {id:"bruccoli",
 name:"Bruccoli",
 image: img2,
-price: '$10'},
+price: 10},
 
 {id:"carrot",
 name:"Carrot",
 image: img3,
-price: '$25'},
+price: 25},
 
 {id:"capsicum",
 name:"Capsicum",
 image: img4,
-price: '$10'},
+price: 10},
 
 {id:"white-raddish",
 name:"White-Raddish",
 image: img5,
-price: '$15'},
+price: 15},
 
 {id:"red-raddish",
 name:"Red-Raddish",
 image: img6,
-price: '$15'},
+price: 15},
 
 {id:"cabbage",
 name:"Cabbage",
 image: img7,
-price: '$22'},
+price: 22},
 
 {id:"cauliflower",
 name:"Cauliflower",
 image: img8,
-price: '$30'},
+price: 30},
 
 {id:"brinjal",
 name:"Brinjal",
 image: img9,
-price: '$25'}
+price: 25}
 
 ];
 
