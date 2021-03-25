@@ -12,7 +12,7 @@ function App(props) {
   
   let [count, setquantity] = useState(x!==null?x.length:0);
   var quantity=(e)=>{
-    return x===null?setquantity(count=0):setquantity(count=e);
+    return e===1?setquantity(count=1):setquantity(count=e);
   }
 
   return (
