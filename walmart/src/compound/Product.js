@@ -24,7 +24,7 @@ var ProductList = (props) => {
         localStorage.setItem("products", JSON.stringify(prod));
         var p = JSON.parse(localStorage.getItem("products"))
         props.quantity(p.length);
-        window.location.reload();
+        //window.location.reload();
     }
 
     const items = props.data!==undefined?(props.data.map((item, key)=>{
