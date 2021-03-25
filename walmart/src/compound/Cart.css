@@ -1,0 +1,40 @@
+.divide {
+    display: flex;
+    margin-top: 2em;
+    max-width: 100%;
+    position: relative;
+    left: 30em;
+  }
+
+  h1{
+      text-align: center;
+      text-decoration: underline;
+  }
+
+  .item_text{
+      position: relative;
+      left: 4em;
+  }
+
+  .btns{
+      padding: 5px;
+      margin: 10px;
+  }
+
+.totallist{
+    float: right;
+   margin-right: 30%;
+   font-weight: bolder;
+
+}
+
+.totalamt{
+  position: relative;
+    left:1em;
+}
+
+.rmv_btn{
+    position: relative;
+    left:15em;
+    padding: 10px;
+}
