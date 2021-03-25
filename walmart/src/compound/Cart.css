@@ -1,0 +1,68 @@
+* {
+    box-sizing: border-box;
+  }
+  
+.container{
+   
+    width: 50%;
+    max-width: 100%;
+    float: left;
+}
+.divide {
+    display: flex;
+    margin-top: 2em;
+  }
+
+  h1{
+      text-align: center;
+      text-decoration: underline;
+      color: brown;
+  }
+
+  .item_text{
+      position: relative;
+      left: 4em;
+  }
+
+  .btns{
+      padding: 5px;
+      margin: 10px;
+  }
+
+  .totallist{
+      margin-top: 10%;
+  }
+
+.totallist aside{
+   font-weight: bolder; 
+   width: 50%;
+   height: 200px;
+   max-height: 100%;
+   max-width: 100%;
+   float: right;
+   background-color: grey;
+   display: flex;
+    align-items: center;
+    border-radius: 8px;
+}
+
+.totallist aside table{
+    margin: 0 auto;
+}
+
+.rmv_btn{
+    position: relative;
+    left:10em;
+    padding: 10px;
+}
+
+.total_amt td b{
+    animation-name: amount;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes amount{
+    from {color: red;}
+    to {color: yellow;}
+}
