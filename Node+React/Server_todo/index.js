@@ -48,7 +48,6 @@ app.post("/api/insert",(req, res)=>{
     res.send(req.body.items);*/
     const items = req.body.items;
     const sqlInsert = "INSERT INTO todolist(items) values(?)";
-    console.log("Post "+items);
     db.query(sqlInsert,[items], (err, result)=>{
         if(err) throw err;
         res.send(`Added Successfully in the db with item name "${items}"`);
