@@ -9,9 +9,9 @@ app.use(express.json())
 app.use(router);
 
 
-//MongoDb Setup
-url = 'mongodb://127.0.0.1:27017/'
-mongoose.connect(url);
+//MongoDb Setup using mongoose
+url = 'mongodb://127.0.0.1:27017/mydb'
+mongoose.connect(url,{useNewUrlParser:true});
 connection = mongoose.connection;
 connection.on('open', ()=>{
     console.log('Mongoose Connected..!');

@@ -8,6 +8,7 @@ const Todos = () => {
   const[items, setItems] = useState();
   //const todos = useSelector(state=>state.todos);
   
+  //Listing items using didMount/useEffect
   useEffect(()=>{
     Axios.get('http://localhost:3011/').then((res)=>{
       setItems(res.data);
@@ -16,6 +17,8 @@ const Todos = () => {
   
   
   const dispatch = useDispatch();
+  
+  //For Deleting specific items
   const handleClick = (id) =>{
     Axios.post("http://localhost:3011/api/delete",{"id": id}).then(()=>{alert("Successfully Deleted");window.location.reload()}).catch(
       (err)=>console.log(err));
@@ -25,20 +28,17 @@ const Todos = () => {
   });
 }
 
+//Updation Function
 const updation = (id)=>{
   const values = prompt("Type your change","eg. Bathing");
   
   Axios.post('http://localhost:3011/api/update',{values, id}).then(()=>{alert("successfully updated"); window.location.reload()});
 };
 
-  /*if(!todos || !todos.length){
-    return <p>No TODOS</p>
-  }*/
-
+  //Front-end listing based on item present/not
   if(!items || !items.length){
     return <p>No TODOS</p>
   }
-  
   return (<ul>
     {items.map((todo) =>{
       return <li><b onClick={()=>handleClick(todo.id)}>{todo.items}</b><button onClick={()=>updation(todo.id)}>Update</button></li>})}
@@ -47,11 +47,10 @@ const updation = (id)=>{
 };
 
 const TodoInput = () =>{
-
-  
   const dispatch = useDispatch();
   const [newTodo, setNewTodo] = useState("");
   
+  //For the insertion Process of items
   const handleClick = () => {
   dispatch({
     type:'ADD_TODO',
@@ -64,7 +63,6 @@ const TodoInput = () =>{
     (err)=>console.log(err));
     
   }
-  
   return (
     <div>
       <input value = {newTodo} onChange={(event)=>setNewTodo(event.target.value)} type="text"/>

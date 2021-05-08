@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const model = require('../Model/model');
 
+//Api for listing items in database
 router.get('/',async(req,res)=>{
     
     try{
@@ -13,6 +14,7 @@ router.get('/',async(req,res)=>{
     
 });
 
+//Api for getting specific item based on id
 router.get('/:id',async(req,res)=>{
     
     try{
@@ -24,6 +26,7 @@ router.get('/:id',async(req,res)=>{
     }
 });
 
+//Api for adding items in database
 router.post('/',async(req,res)=>{
 
     const addItems = new model({
@@ -36,6 +39,7 @@ router.post('/',async(req,res)=>{
         res.send(err);
     }});
 
+//Api for updating existing item
 router.put('/:id',async(req,res)=>{
     
     try{
@@ -49,6 +53,7 @@ router.put('/:id',async(req,res)=>{
         }
     });
 
+//Api for deleting specific items
 router.delete('/:id',async(req,res)=>{
     const item = await model.remove({_id:req.params.id});
     res.json(item);
