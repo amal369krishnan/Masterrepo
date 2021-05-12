@@ -1,35 +1,40 @@
-const express = require('express');
-const cors = require('cors');
-const socket = require('socket.io');
-const app = express();
+const express = require("express");
+const http = require("http");
+const socketio = require("socket.io");
+const router = require("./controllers/routers");
 
 const port = process.env.PORT || 4002;
+const app = express();
+app.use(router);
+const server = http.createServer(app);
+const io = socketio(server, { cors: { origin: "*" } });
 
-//app.use(cors());
-app.use(express.json());//info from front to back-end
-const server = app.listen(port,()=>{console.log(`Server running on the port ${port}`)});
+io.on("connection", (socket) => {
+	console.log(`Socket id : ${socket.id}`);
 
-//io = socket(server);
-io = socket(server,{
-    cors: {
-      origin: "http://localhost:3000"
-    }});
+	socket.on("join", ({ room }) => {
+		socket.join(room);
+	});
 
-//connection setup
-io.on("connection",(socket)=>{
-    console.log(socket.id);
+	socket.on("leave", (room) => {
+		socket.leave(room);
+		console.log("client unsubcribed ", room);
+	});
 
-    socket.on("join_room", (room)=>{
-        socket.join(room);
-        console.log("New room created",room);
-    });
+	socket.on("sendMessage", ({ name, message, room }) => {
+		io.to(room).emit("message", { name, message });
+	});
 
-    socket.on("send_message",(data)=>{
-        
-        socket.to(data.room).emit("recieve_msg",data.content);
-    });
+	socket.on("typing", (typing) => {
+		console.log(typing);
+		socket.broadcast.emit("type", typing);
+	});
 
-    socket.on("disconnect", ()=>{
-        console.log("user Disconnected");
-    })
-})
+	socket.on("disconnect", () => {
+		console.log("client disconnected ", socket.id);
+	});
+});
+
+server.listen(port, () => {
+	console.log(`Running on the port : ${port}`);
+});

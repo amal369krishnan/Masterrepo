@@ -1,88 +1,110 @@
-import './App.css';
-import io from 'socket.io-client';
-import React,{useEffect,useState} from 'react';
-
+import "./App.css";
+import React, { useEffect, useState } from "react";
+import socketIOClient from "socket.io-client";
+const socket = socketIOClient("http://localhost:4002/");
 function App() {
-  var socket
+	const [loggedIn, setlogged] = useState(false);
+	const [state, setState] = useState({ name: "", room: "" });
+	const [message, setMessage] = useState("");
+	const [chat, setChat] = useState([]);
+	const [broadcast, setBroadCast] = useState({});
 
-  const [loggedIn, setlogged] = useState(false);
-  const [room, setRoom] = useState('');
-  const [user, setUser] = useState('');
+	useEffect(() => {
+		socket.on("message", ({ name, message }) => {
+			setChat([...chat, { name, message }]);
+		});
+		socket.on("type", (data) => {
+			setBroadCast(data);
+		});
+	});
 
-  //After loggedin 
-  const [message, setMessage] = useState('');
-  const [messageList, setMessageList] = useState([]);
+	const enterRoom = (e) => {
+		//e.preventDefault();
+		setlogged(true);
+		socket.emit("join", { room: state.room });
+	};
 
-  useEffect(()=>{
-    
-    socket = io("localhost:4002/");})
-  
+	const displayMessage = (e) => {
+		e.preventDefault();
+		socket.emit("sendMessage", {
+			name: state.name,
+			message: message,
+			room: state.room,
+		});
+		e.target.reset();
+	};
 
-  
-  useEffect(()=>{
-    console.log("useeffect", messageList);
-    
-    socket.on("recieve_msg",(msg)=>{
-      setMessageList([...messageList,msg]);
-      
-    })
-  });
+	const chatRender = chat.map((v, k) => {
+		return (
+			<ul>
+				<li key={k}>
+					{v.name} : {v.message}
+				</li>
+			</ul>
+		);
+	});
 
-  const connectToRoom = ()=>{
-    setlogged(true);
-    socket.emit('join_room',room);
-  }
-
-  const sendMessage = ()=>{
-    let messageContent = {
-      room:room,
-      content:{
-      author:user,
-      message:message}
-    }
-
-    socket.emit("send_message",messageContent);
-    console.log(messageList);
-    setMessageList([...messageList,messageContent.content]);
-    console.log("2"+messageList);
-    setMessage("");
-    
-  }
-
-  return (
-    <div className="App">
-       {loggedIn ===false?(
-      <header className="App-header">
-       
-        <div>
-          <div>
-       <input type="text" placeholder="Name" onChange={(e)=>{setUser(e.target.value)}}/>
-       <input type="text" placeholder="Room" onChange={(e)=>{setRoom(e.target.value)}}/>
-       </div>
-       <button onClick={connectToRoom}>Enter Chat</button>
-       </div></header>):
-       (<div className="chatContainer">
-        <div className="messages">{
-          messageList.map((val, key)=>{
-            
-            return (
-            <ul>
-              <li key={key}>{val.author}{val.message}</li>
-            </ul>);
-           })}
-        </div>
-
-           <div className="messageInputs">
-           <input type="text" placeholder="Message" onChange = {(e)=>{setMessage(e.target.value)}}/>
-           <button onClick={sendMessage}>send</button>
-           </div>
-           
-         </div>
-
-       )}
-      
-    </div>
-  );
+	return (
+		<div className="App">
+			{loggedIn === false ? (
+				<header className="App-header">
+					<form onSubmit={enterRoom}>
+						<div>
+							<input
+								type="text"
+								placeholder="Name"
+								onChange={(e) => {
+									state.name = e.target.value;
+								}}
+								required
+							/>
+							<input
+								type="text"
+								placeholder="Room"
+								onChange={(e) => {
+									state.room = e.target.value;
+								}}
+								required
+							/>
+						</div>
+						<button type="submit">Enter Chat</button>
+					</form>
+				</header>
+			) : (
+				<form onSubmit={displayMessage} className="chatContainer">
+					<div className="messages">
+						{chatRender}
+						{broadcast.typing !== undefined && broadcast.typing !== "" ? (
+							<span>
+								{broadcast.name} {broadcast.typing}
+							</span>
+						) : (
+							<span></span>
+						)}
+					</div>
+					<div className="messageInputs">
+						<input
+							id="messageInput"
+							type="text"
+							placeholder="Message"
+							onChange={(e) => {
+								setMessage(e.target.value);
+								socket.emit("typing", {
+									name: state.name,
+									typing: "typing...",
+								});
+								broadcast.typing = "";
+							}}
+							required
+						/>
+						<button type="submit" onClick="">
+							send
+						</button>
+					</div>
+				</form>
+			)}
+		</div>
+	);
 }
 
 export default App;
