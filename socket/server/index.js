@@ -25,9 +25,15 @@ io.on("connection", (socket) => {
 		io.to(room).emit("message", { name, message });
 	});
 
-	socket.on("typing", (typing) => {
-		console.log(typing);
-		socket.broadcast.emit("type", typing);
+	function timeoutFunction() {
+		socket.broadcast.emit("type", {});
+	}
+	socket.on("typing", async (typing) => {
+		if (typing.typing) {
+			typing.type = "is typing";
+			socket.broadcast.emit("type", typing);
+			await setTimeout(timeoutFunction, 2000);
+		}
 	});
 
 	socket.on("disconnect", () => {

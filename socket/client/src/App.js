@@ -14,7 +14,9 @@ function App() {
 			setChat([...chat, { name, message }]);
 		});
 		socket.on("type", (data) => {
-			setBroadCast(data);
+			if (data !== {}) {
+				setBroadCast({ name: data.name, typing: data.type });
+			}
 		});
 	});
 
@@ -74,13 +76,9 @@ function App() {
 				<form onSubmit={displayMessage} className="chatContainer">
 					<div className="messages">
 						{chatRender}
-						{broadcast.typing !== undefined && broadcast.typing !== "" ? (
-							<span>
-								{broadcast.name} {broadcast.typing}
-							</span>
-						) : (
-							<span></span>
-						)}
+						<span>
+							{broadcast.name} {broadcast.typing}
+						</span>
 					</div>
 					<div className="messageInputs">
 						<input
@@ -91,9 +89,8 @@ function App() {
 								setMessage(e.target.value);
 								socket.emit("typing", {
 									name: state.name,
-									typing: "typing...",
+									typing: true,
 								});
-								broadcast.typing = "";
 							}}
 							required
 						/>
