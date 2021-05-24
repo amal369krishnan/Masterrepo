@@ -5,12 +5,26 @@ const mongoose = require("mongoose");
 const mongodb = require("mongodb");
 const student = require("./routers/routers-1");
 const socketio = require("socket.io");
+const path = require("path");
 
 app = express();
 /*
+ * npm install ejs
+ * set views with path.join
+ * set view engine with ejs extension
+ * then render the ejs page
+ */
+app.set("views", path.join(__dirname, "/pages"));
+app.set("view engine", "ejs");
+/*
+ *For css rendering in the ejs
+ */
+app.use(express.static(__dirname + "/pages"));
+
+/*
  * limit --> used to limiting the size of json to 20mb
- * extended:true (by default, it is true) --> allow only string
- * extended:false --> allow all string and image format
+ * extended:false (by default, it is false) --> allow only string
+ * extended:true --> allow all string and image format
  * urlencoded --> for url parsing
  */
 app.use(express.json({ limit: "20mb", extended: true }));
@@ -19,9 +33,9 @@ app.use(cors({ origin: "*" }));
 
 /*Router set-up */
 app.use("/student", student);
-// app.use("/", async (request, response) => {
-// 	await response.send(request.body);
-// });
+app.use("/", (request, response) => {
+	response.render("index");
+});
 
 /*Server setups */
 const port = process.env.PORT || 8080;

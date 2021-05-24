@@ -12,11 +12,9 @@ function showStudent(props) {
 	/*For Deletion operation */
 	const handleDeletion = (e) => {
 		console.log(e);
-		axios
-			.delete("http://localhost:8080/student/delete/" + e)
-			.then((res) => {
-				props.io.emit("message", res);
-			});
+		axios.delete("http://localhost:8080/student/delete/" + e).then((res) => {
+			props.io.emit("message", res);
+		});
 		return trigger;
 	};
 
@@ -96,7 +94,7 @@ function showStudent(props) {
 										handleDeletion(_id);
 									}}
 								>
-									Submit
+									Delete
 								</button>
 							</td>
 						</tr>

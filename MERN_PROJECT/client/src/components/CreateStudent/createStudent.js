@@ -38,6 +38,14 @@ const createStudent = (props) => {
 		form.subject = subject;
 		axios.post("http://localhost:8080/student/", form).then((res) => {
 			props.io.emit("message", res);
+			setForm({
+				name: "",
+				grade: "",
+				gender: "",
+				rollno: "",
+				section: "",
+				subject: [],
+			});
 		});
 	};
 	return (
